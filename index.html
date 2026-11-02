@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;500;700&family=Inter+Tight:wght@300;400;500;700&family=Qwitcher+Grypen:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;500;700&family=Inter+Tight:wght@300;400;500;700&family=Qwitcher+Grypen:wght@400;500;700&display=swap"
     rel="stylesheet">
   <!--
   ==========================================================================
@@ -563,17 +563,17 @@
        is the fallback: no WebGL / reduced motion = the still picture.
        ===================================================================== */
     .qg { background: #F6C9A0; min-height: max(640px, min(860px, 100svh)); display: flex; flex-direction: column }
-    .qg__pic { position: absolute; inset: 0; overflow: hidden }
+    .qg__pic { position: absolute; left: 0; right: 0; top: 0; height: 115%; overflow: hidden }
     .qg__img, .qg__gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block }
-    .qg__img { z-index: 1; object-fit: cover; object-position: 50% 60% }
+    .qg__img { z-index: 1; object-fit: cover; object-position: 50% 0 }
     .qg__gl { z-index: 2; opacity: 0; transition: opacity .8s ease }
     .qg.is-live .qg__gl { opacity: 1 }
     /* no dark panel: a bloom of the picture's own sunlight behind the copy, so plum text stays readable */
     .qg__pic::after {
       content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
-      background: radial-gradient(ellipse 40% 30% at 50% 19%, rgba(255, 238, 212, .68) 0%, rgba(255, 238, 212, .52) 62%, rgba(255, 238, 212, 0) 100%);
+      background: radial-gradient(ellipse 44% 31% at 50% 27%, rgba(255, 238, 212, .72) 0%, rgba(255, 238, 212, .64) 60%, rgba(255, 238, 212, .3) 80%, rgba(255, 238, 212, 0) 100%);
     }
-    .qg__copy { position: relative; z-index: 4; flex: 1; width: 100%; max-width: 860px; margin: 0 auto; padding: 44px 24px 200px; text-align: center; color: var(--c-purple) }
+    .qg__copy { position: relative; z-index: 4; flex: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; max-width: 860px; margin: 0 auto; padding: 40px 24px; text-align: center; color: var(--c-purple) }
     .qg .hero__name { font-size: clamp(84px, 9.6vw, 150px); white-space: nowrap; color: var(--c-purple) }
     .qg .hero__roles { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; font-size: 13px; line-height: 22px; letter-spacing: 2px; color: var(--c-purple) }
     .qg .hero__roles li + li::before { content: "\2022"; color: var(--c-pink-dark); margin: 0 14px }
@@ -584,9 +584,9 @@
       color: var(--c-purple); margin: 0 0 4px; max-width: none;
     }
     .qg .hero__intro p:not(.hero__statement) { font-size: 15px; line-height: 24px; font-weight: 500; color: var(--c-purple); max-width: 620px; margin: 0 auto }
-    /* sits on the water, so the sun stays clear between the two text blocks */
-    .qg .hero__act { position: absolute; left: 0; right: 0; top: 50%; margin: 0; padding: 0; border: 0 }
-    .qg .hero__nudge { font: 500 40px/1.1 'Qwitcher Grypen', cursive; letter-spacing: 0; color: var(--c-purple); margin: 0 }
+    /* the gap leaves the sun clear between the two text groups */
+    .qg .hero__act { margin: clamp(56px, 13vh, 116px) 0 0; padding: 0; border: 0 }
+    .qg .hero__nudge { font: 700 46px/1.1 'Qwitcher Grypen', cursive; letter-spacing: .3px; color: var(--c-purple); margin: 0; -webkit-text-stroke: 3px rgba(255, 238, 212, .85); paint-order: stroke fill }
     .qg .hero__cta { justify-content: center; flex-wrap: nowrap; gap: 12px; margin-top: 12px }
     .qg .btn { padding: 10px 24px; font-size: 14px; letter-spacing: 1.2px; white-space: nowrap }
     .qg .btn--ghost { background: rgba(255, 255, 255, .88); color: var(--c-purple); box-shadow: inset 0 0 0 1px var(--c-pink) }
@@ -598,16 +598,17 @@
       border: 1px solid var(--c-review); border-radius: 4px; background: #fff; color: var(--c-review); cursor: pointer;
     }
     @media (max-width: 1100px) {
-      .qg__pic::after { background: radial-gradient(ellipse 58% 32% at 50% 19%, rgba(255, 238, 212, .68) 0%, rgba(255, 238, 212, .54) 66%, rgba(255, 238, 212, 0) 100%) }
+      .qg__pic::after { background: radial-gradient(ellipse 58% 28% at 50% 26%, rgba(255, 238, 212, .68) 0%, rgba(255, 238, 212, .54) 66%, rgba(255, 238, 212, 0) 100%) }
     }
     @media (max-width: 767px) {
-      .qg__pic::after { background: radial-gradient(ellipse 100% 42% at 50% 24%, rgba(255, 238, 212, .76) 0%, rgba(255, 238, 212, .62) 66%, rgba(255, 238, 212, 0) 100%) }
-      .qg__copy { padding: 40px 20px 100px }
-      .qg .hero__act { position: static; margin-top: 44px }
+      .qg__pic::after { background: radial-gradient(ellipse 100% 36% at 50% 27%, rgba(255, 238, 212, .76) 0%, rgba(255, 238, 212, .62) 66%, rgba(255, 238, 212, 0) 100%) }
+      .qg__copy { padding: 36px 20px 64px }
+      .qg .hero__act { margin-top: 44px }
       .qg .hero__name { font-size: clamp(84px, 25vw, 130px) }
       .qg .hero__roles { flex-direction: column; font-size: 12.5px }
       .qg .hero__roles li + li::before { content: none }
       .qg .hero__statement { font-size: 13px }
+      .qg .hero__nudge { font-size: clamp(30px, 9.4vw, 44px); letter-spacing: 0 }
       .qg .hero__cta { flex-direction: column; align-items: center }
       .qg .btn { width: 100%; max-width: 300px }
       .qg .review-tag span { display: none }
@@ -1181,7 +1182,7 @@
         'void main(){',
         '  float ra=res.x/res.y,ia=isz.x/isz.y;',
         '  vec2 s=ra>ia?vec2(1.,ia/ra):vec2(ra/ia,1.);',
-        '  vec2 uv=v*s+(1.-s)*vec2(.5,.6);',                         // matches object-position: 50% 60%
+        '  vec2 uv=v*s+(1.-s)*vec2(.5,0.);',                         // matches object-position: 50% 0
         '  float w=clamp((uv.y-H)/(1.-H),0.,1.);',
         '  float water=smoothstep(0.,.05,w);',
         '  vec2 d=vec2(0.);',
@@ -1206,9 +1207,10 @@
         // shimmer + sparkle only where the picture is already gold
         '  float m=smoothstep(.55,.92,l);',
         '  float sh=noise(vec2(q.x*38.,q.y*70.)+vec2(t*.5,-t*.9));',
-        '  c*=1.+water*m*(sh-.5)*.5;',
-        '  float sp=pow(noise(vec2(q.x*420.,q.y*620.)+t*1.6),9.)*(.25+.75*w);',
-        '  c+=vec3(1.,.87,.62)*sp*m*water*2.6;',
+        '  c*=1.+water*m*(sh-.5)*.5*(1.-smoothstep(.8,.97,l));',                 // never dims the sun's own white
+        '  vec2 sq=mat2(.8,.6,-.6,.8)*vec2(q.x*isz.x,q.y*isz.y)*.21;',
+        '  float sp=pow(noise(sq+vec2(t*.7,-t*.5))*noise(sq*.53-vec2(t*.4,t*.6)),3.)*(.25+.75*w);',
+        '  c+=vec3(1.,.87,.62)*sp*m*water*2.2;',
         // highlight along the moving rings + a slow breath in the light column
         '  c+=vec3(1.,.9,.72)*max(ring,0.)*.07*water;',
         '  float col=exp(-pow((uv.x-.5)/.02,2.));',
