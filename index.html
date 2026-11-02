@@ -24,7 +24,7 @@
      B · Quantum Field  — light blush ground, live wave-interference canvas
      D · Pink Nebula    — Kate's pink-graded nebula (reference/pink_neb.mp4, graded in Magnific), A's layout
      C · Portal         — light ground, pastel-gradient video (Pexels #40020393) inside an orb
-     G · Living Water   — Jenny's water image (Image Ref/Main.jpg), live WebGL water, copy in a deep-water band
+     G · Living Water   — Jenny's water image (Image Ref/Main.jpg), live WebGL water, plum copy over the picture on a sunlight bloom
 
    Video: Pexels #34413479 "Vibrant abstract purple swirls in motion"
    (Pexels licence: free to use, no attribution required). Cut to a seamless
@@ -562,58 +562,55 @@
        the gold caustics); mountains + geometry stay still. The <img> underneath
        is the fallback: no WebGL / reduced motion = the still picture.
        ===================================================================== */
-    .qg { background: #0E4557; display: flex; flex-direction: column }
-    .qg__pic { position: relative; height: clamp(340px, 42vw, 680px); overflow: hidden }
+    .qg { background: #F6C9A0; min-height: max(640px, min(860px, 100svh)); display: flex; flex-direction: column }
+    .qg__pic { position: absolute; inset: 0; overflow: hidden }
     .qg__img, .qg__gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block }
     .qg__img { z-index: 1; object-fit: cover; object-position: 50% 60% }
     .qg__gl { z-index: 2; opacity: 0; transition: opacity .8s ease }
     .qg.is-live .qg__gl { opacity: 1 }
-    /* the picture sinks into deep water; the sky and the sun stay untouched */
+    /* no dark panel: a bloom of the picture's own sunlight behind the copy, so plum text stays readable */
     .qg__pic::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; z-index: 3; pointer-events: none;
-      background: linear-gradient(0deg, #0E4557 0%, rgba(14, 69, 87, 0) 100%);
+      content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: radial-gradient(ellipse 40% 30% at 50% 19%, rgba(255, 238, 212, .68) 0%, rgba(255, 238, 212, .52) 62%, rgba(255, 238, 212, 0) 100%);
     }
-    .qg .hero__name {
-      position: absolute; z-index: 4; left: 0; right: 0; top: 7%;
-      text-align: center; white-space: nowrap; color: var(--c-purple);
-      font-size: clamp(84px, 11vw, 190px);
-    }
-    .qg__band { position: relative; z-index: 4; width: 100%; max-width: 1280px; margin: 0 auto; padding: 10px 40px 36px; text-align: center; color: var(--c-white) }
-    .qg .hero__roles { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; font-size: 13px; line-height: 22px; letter-spacing: 2px; color: var(--c-white) }
-    .qg .hero__roles li + li::before { content: "\2022"; color: var(--c-pink-soft); margin: 0 14px }
-    .qg__cols { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 56px; align-items: center; margin-top: 16px; text-align: left }
-    .qg .hero__intro, .qg .hero__act { margin: 0; padding: 0; border: 0 }
+    .qg__copy { position: relative; z-index: 4; flex: 1; width: 100%; max-width: 860px; margin: 0 auto; padding: 44px 24px 200px; text-align: center; color: var(--c-purple) }
+    .qg .hero__name { font-size: clamp(84px, 9.6vw, 150px); white-space: nowrap; color: var(--c-purple) }
+    .qg .hero__roles { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; font-size: 13px; line-height: 22px; letter-spacing: 2px; color: var(--c-purple) }
+    .qg .hero__roles li + li::before { content: "\2022"; color: var(--c-pink-dark); margin: 0 14px }
+    .qg .hero__intro { margin: 14px 0 0; padding: 0; border: 0 }
     .qg .hero__intro::before { content: none }
     .qg .hero__statement {
       font: 600 14px/22px 'Urbanist', sans-serif; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--c-white); margin: 0 0 6px; max-width: none;
+      color: var(--c-purple); margin: 0 0 4px; max-width: none;
     }
-    .qg .hero__intro p:not(.hero__statement) { font-size: 15px; line-height: 24px; font-weight: 400; color: rgba(255, 255, 255, .92); max-width: none; margin: 0 }
-    .qg .hero__act { text-align: center }
-    .qg .hero__nudge { font: 500 42px/1 'Qwitcher Grypen', cursive; letter-spacing: 0; color: var(--c-white); margin: 0 }
+    .qg .hero__intro p:not(.hero__statement) { font-size: 15px; line-height: 24px; font-weight: 500; color: var(--c-purple); max-width: 620px; margin: 0 auto }
+    /* sits on the water, so the sun stays clear between the two text blocks */
+    .qg .hero__act { position: absolute; left: 0; right: 0; top: 50%; margin: 0; padding: 0; border: 0 }
+    .qg .hero__nudge { font: 500 40px/1.1 'Qwitcher Grypen', cursive; letter-spacing: 0; color: var(--c-purple); margin: 0 }
     .qg .hero__cta { justify-content: center; flex-wrap: nowrap; gap: 12px; margin-top: 12px }
-    .qg .btn { padding: 9px 22px; font-size: 14px; letter-spacing: 1.2px; white-space: nowrap }
-    .qg .btn--ghost { background: transparent; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .85) }
-    .qg .btn--ghost:hover { background: rgba(255, 255, 255, .14) }
-    .qg .review-tag { top: 16px; bottom: auto }
+    .qg .btn { padding: 10px 24px; font-size: 14px; letter-spacing: 1.2px; white-space: nowrap }
+    .qg .btn--ghost { background: rgba(255, 255, 255, .88); color: var(--c-purple); box-shadow: inset 0 0 0 1px var(--c-pink) }
+    .qg .btn--ghost:hover { background: var(--c-white) }
+    .qg .review-tag { top: auto; bottom: 16px }
     .motion-toggle {
-      position: absolute; top: 16px; right: 16px; z-index: 20;
+      position: absolute; bottom: 16px; right: 16px; z-index: 20;
       font: 500 12px/1 'Inter Tight', sans-serif; letter-spacing: .5px; padding: 8px 12px;
       border: 1px solid var(--c-review); border-radius: 4px; background: #fff; color: var(--c-review); cursor: pointer;
     }
-    @media (max-width: 1080px) {
-      .qg__cols { grid-template-columns: minmax(0, 1fr); gap: 24px; text-align: center }
-      .qg .hero__intro p:not(.hero__statement) { max-width: 620px; margin: 0 auto }
+    @media (max-width: 1100px) {
+      .qg__pic::after { background: radial-gradient(ellipse 58% 32% at 50% 19%, rgba(255, 238, 212, .68) 0%, rgba(255, 238, 212, .54) 66%, rgba(255, 238, 212, 0) 100%) }
     }
     @media (max-width: 767px) {
-      .qg .hero__name { font-size: clamp(84px, 25vw, 130px); top: 16% }
-      .qg .review-tag span { display: none }
-      .qg__band { padding: 16px 20px 44px }
+      .qg__pic::after { background: radial-gradient(ellipse 100% 42% at 50% 24%, rgba(255, 238, 212, .76) 0%, rgba(255, 238, 212, .62) 66%, rgba(255, 238, 212, 0) 100%) }
+      .qg__copy { padding: 40px 20px 100px }
+      .qg .hero__act { position: static; margin-top: 44px }
+      .qg .hero__name { font-size: clamp(84px, 25vw, 130px) }
       .qg .hero__roles { flex-direction: column; font-size: 12.5px }
       .qg .hero__roles li + li::before { content: none }
       .qg .hero__statement { font-size: 13px }
       .qg .hero__cta { flex-direction: column; align-items: center }
       .qg .btn { width: 100%; max-width: 300px }
+      .qg .review-tag span { display: none }
     }
   </style>
 </head>
@@ -637,27 +634,25 @@
     <div class="qg__pic">
       <img class="qg__img" src="assets/water-main.jpg" alt="" width="1672" height="941">
       <canvas class="qg__gl" aria-hidden="true"></canvas>
-      <h1 class="hero__name">Jenny Schiltz</h1>
     </div>
-    <div class="qg__band">
+    <div class="qg__copy">
+      <h1 class="hero__name">Jenny Schiltz</h1>
       <ul class="hero__roles">
         <li>Shamanic Quantum Healer</li>
         <li>Intuitive Guide</li>
         <li>Sacred Journeys</li>
       </ul>
-      <div class="qg__cols">
-        <div class="hero__intro">
-          <p class="hero__statement">There are many ways I work with people.</p>
-          <p>Working within the Quantum Field, I connect with your energy to identify and release blocks, heal
-            shadow aspects, and address physical manifestations of energetic imbalance.</p>
-        </div>
-        <div class="hero__act">
-          <p class="hero__nudge">Discover how we can work together.</p>
-          <div class="hero__cta">
-            <a class="btn" href="https://www.jennyschiltz.org/events/">Events &amp; Healings</a>
-            <a class="btn btn--ghost" href="https://www.jennyschiltz.org/private-sessions/">One-on-One Sessions</a>
-            <a class="btn btn--ghost" href="https://www.jennyschiltz.org/me/">Read About Me</a>
-          </div>
+      <div class="hero__intro">
+        <p class="hero__statement">There are many ways I work with people.</p>
+        <p>Working within the Quantum Field, I connect with your energy to identify and release blocks, heal
+          shadow aspects, and address physical manifestations of energetic imbalance.</p>
+      </div>
+      <div class="hero__act">
+        <p class="hero__nudge">Discover how we can work together.</p>
+        <div class="hero__cta">
+          <a class="btn" href="https://www.jennyschiltz.org/events/">Events &amp; Healings</a>
+          <a class="btn btn--ghost" href="https://www.jennyschiltz.org/private-sessions/">One-on-One Sessions</a>
+          <a class="btn btn--ghost" href="https://www.jennyschiltz.org/me/">Read About Me</a>
         </div>
       </div>
     </div>
