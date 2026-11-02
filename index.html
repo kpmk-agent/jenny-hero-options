@@ -24,6 +24,7 @@
      B · Quantum Field  — light blush ground, live wave-interference canvas
      D · Pink Nebula    — Kate's pink-graded nebula (reference/pink_neb.mp4, graded in Magnific), A's layout
      C · Portal         — light ground, pastel-gradient video (Pexels #40020393) inside an orb
+     H · Golden Arches  — G + the picture's own arches drawing in gold (SVG over the image)
      G · Living Water   — Jenny's water image (Image Ref/Main.jpg), live WebGL water, plum copy over the picture on a sunlight bloom
 
    Video: Pexels #34413479 "Vibrant abstract purple swirls in motion"
@@ -613,6 +614,42 @@
       .qg .btn { width: 100%; max-width: 300px }
       .qg .review-tag span { display: none }
     }
+
+    /* =====================================================================
+       H · GOLDEN ARCHES — Option G + gold lines drawn over the arches already in
+       the picture. The SVG uses Main.jpg's own 1672×941 coordinates with "xMidYMin
+       slice" = object-fit: cover at object-position 50% 0, so it stays registered
+       to the image at every width. Same draw-on as F: --len real lengths, --d delay.
+       ===================================================================== */
+    /* lines fade behind the copy so they never cross the small text */
+    .qh__arches {
+      position: absolute; inset: 0; width: 100%; height: 100%; z-index: 4; pointer-events: none;
+      -webkit-mask-image: radial-gradient(ellipse 36% 22% at 50% 35%, rgba(0, 0, 0, .14) 62%, #000 100%);
+      mask-image: radial-gradient(ellipse 36% 22% at 50% 35%, rgba(0, 0, 0, .14) 62%, #000 100%);
+    }
+    .qh__arches path {
+      fill: none; stroke-linecap: round;
+      stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
+    }
+    .qh__soft { stroke: #FFE3A6; stroke-width: 5; opacity: .3 }
+    .qh__line { stroke: #E9AE3F; stroke-width: 1.8; opacity: .95 }
+    .qh.is-drawn .qh__arches path { animation: qe-draw 2.4s cubic-bezier(.45, 0, .2, 1) var(--d) forwards }
+    .qh.is-drawn .qh__arches { animation: qh-breathe 7s ease-in-out 5s infinite }
+    @keyframes qh-breathe { 0%, 100% { opacity: 1 } 50% { opacity: .72 } }
+    .qh__replay {
+      position: absolute; bottom: 56px; right: 16px; z-index: 20;
+      font: 500 12px/1 'Inter Tight', sans-serif; letter-spacing: .5px; padding: 8px 12px;
+      border: 1px solid var(--c-review); border-radius: 4px; background: #fff; color: var(--c-review); cursor: pointer;
+    }
+    @media (max-width: 1100px) {
+      .qh__arches { -webkit-mask-image: radial-gradient(ellipse 62% 21% at 50% 34%, rgba(0, 0, 0, .14) 66%, #000 100%); mask-image: radial-gradient(ellipse 62% 21% at 50% 34%, rgba(0, 0, 0, .14) 66%, #000 100%) }
+    }
+    @media (max-width: 767px) {
+      .qh__arches { -webkit-mask-image: radial-gradient(ellipse 100% 30% at 50% 28%, rgba(0, 0, 0, .14) 74%, #000 100%); mask-image: radial-gradient(ellipse 100% 30% at 50% 28%, rgba(0, 0, 0, .14) 74%, #000 100%) }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .qh .qh__arches, .qh .qh__arches path { animation: none !important; stroke-dashoffset: 0 }
+    }
   </style>
 </head>
 
@@ -620,6 +657,7 @@
 
   <nav class="review-nav" aria-label="Jump to option">
     <a href="#opt-g">G · Living Water</a>
+    <a href="#opt-h">H · Golden Arches</a>
     <a href="#opt-a">A · Quantum Light</a>
     <a href="#opt-b">B · Quantum Field</a>
     <a href="#opt-c">C · Portal</a>
@@ -635,6 +673,42 @@
     <div class="qg__pic">
       <img class="qg__img" src="assets/water-main.jpg" alt="" width="1672" height="941">
       <canvas class="qg__gl" aria-hidden="true"></canvas>
+    </div>
+    <div class="qg__copy">
+      <h1 class="hero__name">Jenny Schiltz</h1>
+      <ul class="hero__roles">
+        <li>Shamanic Quantum Healer</li>
+        <li>Intuitive Guide</li>
+        <li>Sacred Journeys</li>
+      </ul>
+      <div class="hero__intro">
+        <p class="hero__statement">There are many ways I work with people.</p>
+        <p>Working within the Quantum Field, I connect with your energy to identify and release blocks, heal
+          shadow aspects, and address physical manifestations of energetic imbalance.</p>
+      </div>
+      <div class="hero__act">
+        <p class="hero__nudge">Discover how we can work together.</p>
+        <div class="hero__cta">
+          <a class="btn" href="https://www.jennyschiltz.org/events/">Events &amp; Healings</a>
+          <a class="btn btn--ghost" href="https://www.jennyschiltz.org/private-sessions/">One-on-One Sessions</a>
+          <a class="btn btn--ghost" href="https://www.jennyschiltz.org/me/">Read About Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= H · GOLDEN ARCHES ======================= -->
+  <section class="hero qg qh" id="opt-h">
+    <div class="review-tag">Option H <span>Golden Arches · G + the image's arches drawing in</span></div>
+    <button type="button" class="qh__replay">Replay arches</button>
+    <button class="motion-toggle" type="button" aria-pressed="true">Movement: on</button>
+    <div class="qg__pic">
+      <img class="qg__img" src="assets/water-main.jpg" alt="" width="1672" height="941">
+      <canvas class="qg__gl" aria-hidden="true"></canvas>
+      <svg class="qh__arches" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+        <g class="qh__soft"><path d="M690.4 409.8A146 146 0 0 1 836.0 274.0" style="--len:219;--d:0s"/><path d="M981.6 409.8A146 146 0 0 0 836.0 274.0" style="--len:219;--d:0s"/><path d="M591.5 348.0A250 250 0 0 1 836.0 150.0" style="--len:340;--d:0.5s"/><path d="M1080.5 348.0A250 250 0 0 0 836.0 150.0" style="--len:340;--d:0.5s"/><path d="M440.9 306.1A409 409 0 0 1 836.0 3.0" style="--len:535;--d:1.0s"/><path d="M1231.1 306.1A409 409 0 0 0 836.0 3.0" style="--len:535;--d:1.0s"/><path d="M836.0 175.0A145 145 0 0 1 836.0 -115.0" style="--len:456;--d:1.5s"/><path d="M836.0 175.0A145 145 0 0 0 836.0 -115.0" style="--len:456;--d:1.5s"/><path d="M376.3 415.5A687 687 0 0 1 149.4 -71.0" style="--len:552;--d:2.0s"/><path d="M1295.7 415.5A687 687 0 0 0 1522.6 -71.0" style="--len:552;--d:2.0s"/></g>
+        <g class="qh__line"><path d="M690.4 409.8A146 146 0 0 1 836.0 274.0" style="--len:219;--d:0s"/><path d="M981.6 409.8A146 146 0 0 0 836.0 274.0" style="--len:219;--d:0s"/><path d="M591.5 348.0A250 250 0 0 1 836.0 150.0" style="--len:340;--d:0.5s"/><path d="M1080.5 348.0A250 250 0 0 0 836.0 150.0" style="--len:340;--d:0.5s"/><path d="M440.9 306.1A409 409 0 0 1 836.0 3.0" style="--len:535;--d:1.0s"/><path d="M1231.1 306.1A409 409 0 0 0 836.0 3.0" style="--len:535;--d:1.0s"/><path d="M836.0 175.0A145 145 0 0 1 836.0 -115.0" style="--len:456;--d:1.5s"/><path d="M836.0 175.0A145 145 0 0 0 836.0 -115.0" style="--len:456;--d:1.5s"/><path d="M376.3 415.5A687 687 0 0 1 149.4 -71.0" style="--len:552;--d:2.0s"/><path d="M1295.7 415.5A687 687 0 0 0 1522.6 -71.0" style="--len:552;--d:2.0s"/></g>
+      </svg>
     </div>
     <div class="qg__copy">
       <h1 class="hero__name">Jenny Schiltz</h1>
@@ -1153,8 +1227,7 @@
   </script>
   <script>
     /* G · Living Water: shader over the still <img>. Runs only while on screen. */
-    (function () {
-      var hero = document.getElementById('opt-g');
+    document.querySelectorAll('.qg').forEach(function (hero) {
       var canvas = hero.querySelector('.qg__gl');
       var img = hero.querySelector('.qg__img');
       var toggle = hero.querySelector('.motion-toggle');
@@ -1269,7 +1342,17 @@
         toggle.textContent = 'Movement: ' + (wanted ? 'on' : 'off');
         sync();
       });
-    })();
+    });
+    /* H: arches draw once on screen; review-only Replay button */
+    document.querySelectorAll('.qh').forEach(function (e) {
+      var draw = function () { e.classList.add('is-drawn') };
+      new IntersectionObserver(function (x, o) {
+        if (x[0].isIntersecting) { draw(); o.disconnect(); }
+      }, { threshold: .35 }).observe(e);
+      e.querySelector('.qh__replay').addEventListener('click', function () {
+        e.classList.remove('is-drawn'); void e.offsetWidth; draw();
+      });
+    });
   </script>
 
 </body>
