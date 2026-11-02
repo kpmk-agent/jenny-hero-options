@@ -616,8 +616,9 @@
     }
 
     /* =====================================================================
-       H · GOLDEN ARCHES — Option G + gold lines drawn over the arches already in
-       the picture. The SVG uses Main.jpg's own 1672×941 coordinates with "xMidYMin
+       H · GOLDEN ARCHES — Option G on Kate's clean plate (Main-no-arches.jpg, same
+       horizon), with the arches drawn on as gold lines. The SVG uses the clean
+       plate's own 2752×1536 coordinates with "xMidYMin
        slice" = object-fit: cover at object-position 50% 0, so it stays registered
        to the image at every width. Same draw-on as F: --len real lengths, --d delay.
        ===================================================================== */
@@ -631,8 +632,8 @@
       fill: none; stroke-linecap: round;
       stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
     }
-    .qh__soft { stroke: #FFE3A6; stroke-width: 5; opacity: .3 }
-    .qh__line { stroke: #E9AE3F; stroke-width: 1.8; opacity: .95 }
+    .qh__soft { stroke: #FFE3A6; stroke-width: 6; opacity: .38 }
+    .qh__line { stroke: #E9AE3F; stroke-width: 2.2; opacity: 1 }
     .qh.is-drawn .qh__arches path { animation: qe-draw 2.4s cubic-bezier(.45, 0, .2, 1) var(--d) forwards }
     .qh.is-drawn .qh__arches { animation: qh-breathe 7s ease-in-out 5s infinite }
     @keyframes qh-breathe { 0%, 100% { opacity: 1 } 50% { opacity: .72 } }
@@ -699,15 +700,15 @@
 
   <!-- ======================= H · GOLDEN ARCHES ======================= -->
   <section class="hero qg qh" id="opt-h">
-    <div class="review-tag">Option H <span>Golden Arches · G + the image's arches drawing in</span></div>
+    <div class="review-tag">Option H <span>Golden Arches · G on the clean image · arches drawing in</span></div>
     <button type="button" class="qh__replay">Replay arches</button>
     <button class="motion-toggle" type="button" aria-pressed="true">Movement: on</button>
     <div class="qg__pic">
-      <img class="qg__img" src="assets/water-main.jpg" alt="" width="1672" height="941">
+      <img class="qg__img" src="assets/water-main-no-arches.jpg" alt="" width="2752" height="1536">
       <canvas class="qg__gl" aria-hidden="true"></canvas>
-      <svg class="qh__arches" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
-        <g class="qh__soft"><path d="M690.4 409.8A146 146 0 0 1 836.0 274.0" style="--len:219;--d:0s"/><path d="M981.6 409.8A146 146 0 0 0 836.0 274.0" style="--len:219;--d:0s"/><path d="M591.5 348.0A250 250 0 0 1 836.0 150.0" style="--len:340;--d:0.5s"/><path d="M1080.5 348.0A250 250 0 0 0 836.0 150.0" style="--len:340;--d:0.5s"/><path d="M414.9 329.2A436 436 0 0 1 836.0 6.0" style="--len:571;--d:1.0s"/><path d="M1257.1 329.2A436 436 0 0 0 836.0 6.0" style="--len:571;--d:1.0s"/><path d="M836.0 175.0A145 145 0 0 1 836.0 -115.0" style="--len:456;--d:1.5s"/><path d="M836.0 175.0A145 145 0 0 0 836.0 -115.0" style="--len:456;--d:1.5s"/><path d="M376.3 415.5A687 687 0 0 1 149.4 -71.0" style="--len:552;--d:2.0s"/><path d="M1295.7 415.5A687 687 0 0 0 1522.6 -71.0" style="--len:552;--d:2.0s"/></g>
-        <g class="qh__line"><path d="M690.4 409.8A146 146 0 0 1 836.0 274.0" style="--len:219;--d:0s"/><path d="M981.6 409.8A146 146 0 0 0 836.0 274.0" style="--len:219;--d:0s"/><path d="M591.5 348.0A250 250 0 0 1 836.0 150.0" style="--len:340;--d:0.5s"/><path d="M1080.5 348.0A250 250 0 0 0 836.0 150.0" style="--len:340;--d:0.5s"/><path d="M414.9 329.2A436 436 0 0 1 836.0 6.0" style="--len:571;--d:1.0s"/><path d="M1257.1 329.2A436 436 0 0 0 836.0 6.0" style="--len:571;--d:1.0s"/><path d="M836.0 175.0A145 145 0 0 1 836.0 -115.0" style="--len:456;--d:1.5s"/><path d="M836.0 175.0A145 145 0 0 0 836.0 -115.0" style="--len:456;--d:1.5s"/><path d="M376.3 415.5A687 687 0 0 1 149.4 -71.0" style="--len:552;--d:2.0s"/><path d="M1295.7 415.5A687 687 0 0 0 1522.6 -71.0" style="--len:552;--d:2.0s"/></g>
+      <svg class="qh__arches" viewBox="0 0 2752 1536" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+        <g class="qh__soft"><path d="M1138.3 668.9A238.3 238.3 0 0 1 1376.0 447.3" style="--len:358;--d:0s"/><path d="M1613.7 668.9A238.3 238.3 0 0 0 1376.0 447.3" style="--len:358;--d:0s"/><path d="M976.9 568.0A408.1 408.1 0 0 1 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M1775.1 568.0A408.1 408.1 0 0 0 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M688.6 537.4A711.7 711.7 0 0 1 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M2063.4 537.4A711.7 711.7 0 0 0 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M1376.0 285.7A236.7 236.7 0 0 1 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M1376.0 285.7A236.7 236.7 0 0 0 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M625.6 678.2A1121.4 1121.4 0 0 1 255.3 -115.9" style="--len:902;--d:2.0s"/><path d="M2126.4 678.2A1121.4 1121.4 0 0 0 2496.7 -115.9" style="--len:902;--d:2.0s"/></g>
+        <g class="qh__line"><path d="M1138.3 668.9A238.3 238.3 0 0 1 1376.0 447.3" style="--len:358;--d:0s"/><path d="M1613.7 668.9A238.3 238.3 0 0 0 1376.0 447.3" style="--len:358;--d:0s"/><path d="M976.9 568.0A408.1 408.1 0 0 1 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M1775.1 568.0A408.1 408.1 0 0 0 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M688.6 537.4A711.7 711.7 0 0 1 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M2063.4 537.4A711.7 711.7 0 0 0 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M1376.0 285.7A236.7 236.7 0 0 1 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M1376.0 285.7A236.7 236.7 0 0 0 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M625.6 678.2A1121.4 1121.4 0 0 1 255.3 -115.9" style="--len:902;--d:2.0s"/><path d="M2126.4 678.2A1121.4 1121.4 0 0 0 2496.7 -115.9" style="--len:902;--d:2.0s"/></g>
       </svg>
     </div>
     <div class="qg__copy">
