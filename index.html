@@ -632,11 +632,29 @@
       fill: none; stroke-linecap: round;
       stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
     }
-    .qh__soft { stroke: #FFE3A6; stroke-width: 6; opacity: .38 }
-    .qh__line { stroke: #E9AE3F; stroke-width: 2.2; opacity: 1 }
+    /* 2026-11-06 "more gold, make the arcs pop": richer gradient line + pulsing halo + a
+       spark of light that runs up each arch. Halo is its OWN svg with a CSS blur so the
+       pulse is a compositor-only opacity change (no per-frame re-blur). */
+    .qh__soft { stroke: #FFE3A6; stroke-width: 9; opacity: .42 }
+    .qh__line { stroke: url(#qhGold); stroke-width: 3.6; opacity: 1 }
+    .qh__glow { filter: blur(7px); opacity: .7; will-change: opacity }
+    .qh__glow path { stroke: #F5B83C; stroke-width: 22 }
     .qh.is-drawn .qh__arches path { animation: qe-draw 2.4s cubic-bezier(.45, 0, .2, 1) var(--d) forwards }
-    .qh.is-drawn .qh__arches { animation: qh-breathe 7s ease-in-out 5s infinite }
-    @keyframes qh-breathe { 0%, 100% { opacity: 1 } 50% { opacity: .72 } }
+    .qh.is-drawn .qh__glow { animation: qh-glow 4.5s ease-in-out 4.4s infinite }
+    @keyframes qh-glow { 0%, 100% { opacity: .7 } 50% { opacity: .25 } }
+    /* spark: one short dash (90) + a gap longer than any arch, slid from before the
+       start to past the end. Halves run base -> apex, so two sparks meet at the top. */
+    .qh .qh__spark path { stroke-dasharray: 90 6000; stroke-dashoffset: 100 }
+    .qh__spark-halo { stroke: #FFD978; stroke-width: 14; opacity: .45 }
+    .qh__spark-core { stroke: #FFF8E4; stroke-width: 4.5 }
+    /* fixed end value (-1000 > longest arch 933): a calc(var(--len)) keyframe made
+       Chrome JUMP instead of slide, so the spark never showed. Linear = same speed on
+       every arch; the dash simply runs off the end of shorter ones. */
+    .qh.is-drawn .qh__spark path { animation: qh-spark 9s linear calc(var(--d) + 4.4s) infinite }
+    @keyframes qh-spark {
+      0% { stroke-dashoffset: 100 }
+      40%, 100% { stroke-dashoffset: -1000 }
+    }
     .qh__replay {
       position: absolute; bottom: 56px; right: 16px; z-index: 20;
       font: 500 12px/1 'Inter Tight', sans-serif; letter-spacing: .5px; padding: 8px 12px;
@@ -646,10 +664,12 @@
       .qh__arches { -webkit-mask-image: radial-gradient(ellipse 62% 21% at 50% 34%, rgba(0, 0, 0, .14) 66%, #000 100%); mask-image: radial-gradient(ellipse 62% 21% at 50% 34%, rgba(0, 0, 0, .14) 66%, #000 100%) }
     }
     @media (max-width: 767px) {
+      .qh__glow { filter: blur(4px) }
       .qh__arches { -webkit-mask-image: radial-gradient(ellipse 100% 30% at 50% 28%, rgba(0, 0, 0, .14) 74%, #000 100%); mask-image: radial-gradient(ellipse 100% 30% at 50% 28%, rgba(0, 0, 0, .14) 74%, #000 100%) }
     }
     @media (prefers-reduced-motion: reduce) {
       .qh .qh__arches, .qh .qh__arches path { animation: none !important; stroke-dashoffset: 0 }
+      .qh .qh__spark { display: none }
     }
   </style>
 </head>
@@ -700,16 +720,19 @@
 
   <!-- ======================= H · GOLDEN ARCHES ======================= -->
   <section class="hero qg qh" id="opt-h">
-    <div class="review-tag">Option H <span>Golden Arches · G on the clean image · arches drawing in</span></div>
+    <div class="review-tag">Option H <span>Golden Arches · G on the clean image · glowing gold arches</span></div>
     <button type="button" class="qh__replay">Replay arches</button>
     <button class="motion-toggle" type="button" aria-pressed="true">Movement: on</button>
     <div class="qg__pic">
       <img class="qg__img" src="assets/water-main-no-arches.jpg" alt="" width="2752" height="1536">
       <canvas class="qg__gl" aria-hidden="true"></canvas>
-      <svg class="qh__arches" viewBox="0 0 2752 1536" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+      <svg class="qh__arches qh__glow" viewBox="0 0 2752 1536" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false"><g><path d="M1138.3 668.9A238.3 238.3 0 0 1 1376.0 447.3" style="--len:358;--d:0s"/><path d="M1613.7 668.9A238.3 238.3 0 0 0 1376.0 447.3" style="--len:358;--d:0s"/><path d="M976.9 568.0A408.1 408.1 0 0 1 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M1775.1 568.0A408.1 408.1 0 0 0 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M688.6 537.4A711.7 711.7 0 0 1 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M2063.4 537.4A711.7 711.7 0 0 0 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M1376.0 285.7A236.7 236.7 0 0 1 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M1376.0 285.7A236.7 236.7 0 0 0 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M625.6 678.2A1121.4 1121.4 0 0 1 255.3 -115.9" style="--len:902;--d:2.0s"/><path d="M2126.4 678.2A1121.4 1121.4 0 0 0 2496.7 -115.9" style="--len:902;--d:2.0s"/></g></svg>
+      <svg class="qh__arches qh__main" viewBox="0 0 2752 1536" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
+        <defs><linearGradient id="qhGold" gradientUnits="userSpaceOnUse" x1="0" y1="-190" x2="0" y2="690"><stop offset="0" stop-color="#FFF1C4"/><stop offset=".45" stop-color="#F7C65A"/><stop offset="1" stop-color="#DB9A2C"/></linearGradient></defs>
         <g class="qh__soft"><path d="M1138.3 668.9A238.3 238.3 0 0 1 1376.0 447.3" style="--len:358;--d:0s"/><path d="M1613.7 668.9A238.3 238.3 0 0 0 1376.0 447.3" style="--len:358;--d:0s"/><path d="M976.9 568.0A408.1 408.1 0 0 1 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M1775.1 568.0A408.1 408.1 0 0 0 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M688.6 537.4A711.7 711.7 0 0 1 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M2063.4 537.4A711.7 711.7 0 0 0 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M1376.0 285.7A236.7 236.7 0 0 1 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M1376.0 285.7A236.7 236.7 0 0 0 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M625.6 678.2A1121.4 1121.4 0 0 1 255.3 -115.9" style="--len:902;--d:2.0s"/><path d="M2126.4 678.2A1121.4 1121.4 0 0 0 2496.7 -115.9" style="--len:902;--d:2.0s"/></g>
         <g class="qh__line"><path d="M1138.3 668.9A238.3 238.3 0 0 1 1376.0 447.3" style="--len:358;--d:0s"/><path d="M1613.7 668.9A238.3 238.3 0 0 0 1376.0 447.3" style="--len:358;--d:0s"/><path d="M976.9 568.0A408.1 408.1 0 0 1 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M1775.1 568.0A408.1 408.1 0 0 0 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M688.6 537.4A711.7 711.7 0 0 1 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M2063.4 537.4A711.7 711.7 0 0 0 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M1376.0 285.7A236.7 236.7 0 0 1 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M1376.0 285.7A236.7 236.7 0 0 0 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M625.6 678.2A1121.4 1121.4 0 0 1 255.3 -115.9" style="--len:902;--d:2.0s"/><path d="M2126.4 678.2A1121.4 1121.4 0 0 0 2496.7 -115.9" style="--len:902;--d:2.0s"/></g>
       </svg>
+      <svg class="qh__arches qh__spark" viewBox="0 0 2752 1536" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false"><g class="qh__spark-halo"><path d="M1138.3 668.9A238.3 238.3 0 0 1 1376.0 447.3" style="--len:358;--d:0s"/><path d="M1613.7 668.9A238.3 238.3 0 0 0 1376.0 447.3" style="--len:358;--d:0s"/><path d="M976.9 568.0A408.1 408.1 0 0 1 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M1775.1 568.0A408.1 408.1 0 0 0 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M688.6 537.4A711.7 711.7 0 0 1 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M2063.4 537.4A711.7 711.7 0 0 0 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M1376.0 285.7A236.7 236.7 0 0 1 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M1376.0 285.7A236.7 236.7 0 0 0 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M625.6 678.2A1121.4 1121.4 0 0 1 255.3 -115.9" style="--len:902;--d:2.0s"/><path d="M2126.4 678.2A1121.4 1121.4 0 0 0 2496.7 -115.9" style="--len:902;--d:2.0s"/></g><g class="qh__spark-core"><path d="M1138.3 668.9A238.3 238.3 0 0 1 1376.0 447.3" style="--len:358;--d:0s"/><path d="M1613.7 668.9A238.3 238.3 0 0 0 1376.0 447.3" style="--len:358;--d:0s"/><path d="M976.9 568.0A408.1 408.1 0 0 1 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M1775.1 568.0A408.1 408.1 0 0 0 1376.0 244.8" style="--len:556;--d:0.5s"/><path d="M688.6 537.4A711.7 711.7 0 0 1 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M2063.4 537.4A711.7 711.7 0 0 0 1376.0 9.8" style="--len:933;--d:1.0s"/><path d="M1376.0 285.7A236.7 236.7 0 0 1 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M1376.0 285.7A236.7 236.7 0 0 0 1376.0 -187.7" style="--len:745;--d:1.5s"/><path d="M625.6 678.2A1121.4 1121.4 0 0 1 255.3 -115.9" style="--len:902;--d:2.0s"/><path d="M2126.4 678.2A1121.4 1121.4 0 0 0 2496.7 -115.9" style="--len:902;--d:2.0s"/></g></svg>
     </div>
     <div class="qg__copy">
       <h1 class="hero__name">Jenny Schiltz</h1>
